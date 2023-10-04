@@ -1,7 +1,15 @@
 const express = require('express');
+const { Director } = require('../db');
 
 function create(req,res,next){
-    res.send('Directors create');
+    const name = req.body.name;
+    const lastName = req.body.lastName;
+
+    Director.create({
+        name: name,
+        lastName: lastName
+    }).then(object => res.json(object))
+    .catch(err => res.send(err));
 }
 
 function list(req,res,next){
